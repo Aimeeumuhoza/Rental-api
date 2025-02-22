@@ -25,7 +25,7 @@ export class AuthService {
           email: profile.emails?.[0]?.value,
           name: profile.displayName,
           googleId: profile.id,
-          role: UserRole.RENTER // Default role
+          role: UserRole.RENTER 
         });
 
         await userRepository.save(user);

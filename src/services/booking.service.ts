@@ -47,7 +47,7 @@ export class BookingService {
     checkInDate: Date;
     checkOutDate: Date;
   }) {
-    // Check if property exists and is available
+    
     const property = await propertyRepository.findOne({
       where: { id: bookingData.propertyId, isAvailable: true },
     });
@@ -55,8 +55,6 @@ export class BookingService {
     if (!property) {
       throw new Error("Property not found or unavailable");
     }
-
-    // Check for existing confirmed bookings within the requested date range
     const existingBooking = await bookingRepository.findOne({
       where: {
         propertyId: bookingData.propertyId,
@@ -67,12 +65,12 @@ export class BookingService {
     });
 
     if (existingBooking) {
-      // Find the next available check-in date
+      
       const nextAvailableBooking = await bookingRepository.findOne({
         where: {
           propertyId: bookingData.propertyId,
           status: BookingStatus.CONFIRMED ,
-          checkInDate: MoreThanOrEqual(existingBooking.checkOutDate as Date), // Find the next check-in date
+          checkInDate: MoreThanOrEqual(existingBooking.checkOutDate as Date), 
         },
         order: { checkInDate: "ASC" },
       });

@@ -6,7 +6,6 @@ import {
     OneToMany 
   } from "typeorm";  
   import { Booking } from "./Booking";  
-//   import { UserRole } from "../enums/UserRole";  // Ensure this is correctly imported
   
   export enum UserRole {
     RENTER = 'RENTER',
